@@ -15,12 +15,22 @@ module LunaPark
       end
 
       module InstanceMethods
-        extend Forwardable
+        def validation_errors
+          validation.errors
+        end
+
+        def valid?
+          validation.valid?
+        end
 
         private
 
+        def valid_params
+          validation.valid_params
+        end
+
         def validation
-          @validation ||= self.class.validate(params)
+          @validation ||= self.class._validate(params)
         end
 
         # :nocov:
@@ -28,8 +38,6 @@ module LunaPark
           raise Errors::AbstractMethod
         end
         # :nocov:
-
-        delegate %i[valid? validation_errors valid_params] => :validation
       end
 
       module ClassMethods
@@ -37,7 +45,7 @@ module LunaPark
           @_validator = klass
         end
 
-        def validate(params)
+        def _validate(params)
           @_validator&.validate(params)
         end
       end

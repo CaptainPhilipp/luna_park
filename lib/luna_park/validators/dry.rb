@@ -17,8 +17,13 @@ module LunaPark
         (valid? && result.output) || {}
       end
 
-      def validation_errors
+      def errors
         result.errors || {}
+      end
+
+      def validation_errors
+        warn 'Please, change `LunaPark::Validators::Dry#validation_errors` to `#errors`'
+        errors
       end
 
       private
