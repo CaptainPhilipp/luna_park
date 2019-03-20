@@ -16,17 +16,17 @@ module LunaPark
 
       module InstanceMethods
         def validation_errors
-          validation.errors
+          validation ? validation.errors : {}
         end
 
         def valid?
-          validation.valid?
+          validation ? validation.valid? : true
         end
 
         private
 
         def valid_params
-          validation.valid_params
+          validation ? validation.valid_params : params
         end
 
         def validation
