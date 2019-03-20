@@ -10,20 +10,25 @@ module LunaPark
       end
 
       def valid?
+        warn 'DEPRECATED: Change `LunaPark::Validators::Dry#valid?` to `#success?`'
+        success?
+      end
+
+      def success?
         result.success?
       end
 
       def valid_params
-        (valid? && result.output) || {}
+        (success? && result.output) || {}
+      end
+
+      def validation_errors
+        warn 'DEPRECATED: Change `LunaPark::Validators::Dry#validation_errors` to `#errors`'
+        errors
       end
 
       def errors
         result.errors || {}
-      end
-
-      def validation_errors
-        warn 'Please, change `LunaPark::Validators::Dry#validation_errors` to `#errors`'
-        errors
       end
 
       private

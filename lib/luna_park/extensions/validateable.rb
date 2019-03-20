@@ -20,7 +20,7 @@ module LunaPark
         end
 
         def valid?
-          validation ? validation.valid? : true
+          validation ? validation.success? : true
         end
 
         private
