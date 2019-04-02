@@ -4,6 +4,8 @@ module LunaPark
   module Entities
     # add description
     class Nested < Attributable
+      extend Extensions::Wrappable[Hash]
+
       class << self
         def namespace(name, &block) # rubocop:disable Metrics/MethodLength
           serializable_attributes(name)
